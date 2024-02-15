@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="\css\profile.css">
+    <link rel="stylesheet" href="\css\head.css">
+</head>
+<body>
+   
+    <%-include('../particals/head' )%>
+   
+  
+    <div class="section">
+        
+        <div id="buttons">
+         <a href="/profile/<%=user.id%>/add_dish"> <img src="/images/button.png" class="button_size"></a>
+         <a href="/profile/<%=user.id%>/savedPost"><img src="/images/save-instagram2.png" class="button_size"></a>
+         <a href="/profile/<%=user.id%>/editProfile"><img src="/images/document-editor.png" class="button_size"></a>
+         <img <%if(request.length===0){%>src="/images/bell.png"<%}else{%>src="/images/notification (1).png"<%}%> class="notification_button">
+        </div>
+
+
+        <div id="blur"></div>
+      
+      
+        <div class="profile">
+          
+            <div class="profile_photo">
+                  
+                 <img class="photo" src="<%=user.profile[0].url%>"> 
+                 
+            </div>
+            
+            <div class="profile_details">
+                <h1 id="name"><%=user.username%></h1>
+                <div id="detail">
+                    <div id="Following" class="straight_align">
+                     <h3 id="color"><%=user.Following.length%></h3>
+                     <h3>Following</h3>
+                    </div>
+                    <div id="Followers">
+                        <h3 id="color"><%=user.Followers.length%></h3>
+                        <h3>Followers</h3>
+                    </div>
+                    <div id="spacing_left"class="straight_align">       
+                       
+                        <% if (user.Followers.length <=3) {%>
+                            <img id="crown" src="/images/6.png">
+                        <%}if (user.Followers.length >= 4 && user.Followers.length < 6) {%>
+                            <img id="crown" src="/images/5.jpeg">
+                        <%}if (user.Followers.length >= 6 && user.Followers.length < 8) {%>
+                            <img id="crown" src="/images/4.jpeg">
+                        <%}if (user.Followers.length >= 8 && user.Followers.length < 10) {%>
+                            <img id="crown" src="/images/3.png">
+                        <%}if (user.Followers.length >= 10 && user.Followers.length < 12) {%>
+                            <img id="crown" src="/images/2.jpg">
+                        <%}if (user.Followers.length >= 12) {%>
+                            <img id="crown" src="/images/1.jpg">
+                        <%}%>
+                        
+                 
+                      
+                        <h3>Crown</h3>
+                    </div>
+                </div>
+                <p><%=user.about%></p>
+                
+            
+            </div>
+    
+        </div>
+        <div class="position_of_FollowingNotification">
+            <div class="FollowingNotification">
+                <h1 id="notification_bar">Following</h1>
+                <div id="request">
+                    <% for(following of Following){%>
+                        <div class="attach2">
+                            <div class="person_request2">
+                                <img class="requested_profile" src="<%=following.profile[0].url%>">
+                                <h3 class="requested_person"><%=following.username%>
+                                    <% if (following.Followers.length <=3) {%>
+                                        <img id="crown" src="/images/6.png">
+                                    <%}if (following.Followers.length >= 4 && following.Followers.length < 6) {%>
+                                        <img id="crown" src="/images/5.jpeg">
+                                    <%}if (following.Followers.length >= 6 && following.Followers.length < 8) {%>
+                                        <img id="crown" src="/images/4.jpeg">
+                                    <%}if (following.Followers.length >= 8 && following.Followers.length < 10) {%>
+                                        <img id="crown" src="/images/3.png">
+                                    <%}if (following.Followers.length >= 10 && following.Followers.length < 12) {%>
+                                        <img id="crown" src="/images/2.jpg">
+                                    <%}if (following.Followers.length >= 12) {%>
+                                        <img id="crown" src="/images/1.jpg">
+                                    <%}%></h3>
+                            </div>
+                            <form class="button_placing" method="post" action="/profile/<%=CurrentUser._id%>/following/<%=following.id%>/remove" >
+                            <button class="removeFromList">Remove</button>
+                            </form>
+                           </div>
+                           <%}%>
+                 </div> 
+            </div>
+             </div>
+
+
+             <div class="position_of_FollowerNotification">
+                <div class="FollowerNotification">
+                    <h1 id="notification_bar">Followers</h1>
+                    <div id="request">
+                        <% for(Follower of followers){%>
+                            <div class="attach">
+                                <div class="person_request">
+                                    <img class="requested_profile" src="<%=Follower.profile[0].url%>">
+                                    <h3 class="requested_person"><%=Follower.username%> <% if (Follower.Followers.length <=3) {%>
+                                        <img id="crown" src="/images/6.png">
+                                    <%}if (Follower.Followers.length >= 4 && Follower.Followers.length < 6) {%>
+                                        <img id="crown" src="/images/5.jpeg">
+                                    <%}if (Follower.Followers.length>= 6 && Follower.Followers.length < 8) {%>
+                                        <img id="crown" src="/images/4.jpeg">
+                                    <%}if (Follower.Followers.length >= 8 && Follower.Followers.length < 10) {%>
+                                        <img id="crown" src="/images/3.png">
+                                    <%}if (Follower.Followers.length >= 10 && Follower.Followers.length < 12) {%>
+                                        <img id="crown" src="/images/2.jpg">
+                                    <%}if (Follower.Followers.length >= 12) {%>
+                                        <img id="crown" src="/images/1.jpg">
+                                    <%}%></h3>
+                                </div>
+                                
+                            <% if(user.Following.includes(Follower.id)){%>
+                                <div class="button_placing">
+                                <button class="FollowBack">Following</button>
+                                </div>
+                                <%}else{%>  
+
+                                <% if(user.sendRequest.includes(Follower.id)){%>
+                                    <form class="button_placing" action="/profile/<%=CurrentUser._id%>/follow/<%=Follower.id%>/cancel"  method="post">
+                                        <button class="Requestedlist">Requested</button>
+                                        </form><%}else{%><form class="button_placing"  method="post" action="/profile/<%=CurrentUser._id%>/follow/<%=Follower.id%>/request">
+                                    <button class="FollowButton">Follow</button>
+                                    </form><%}%>
+                                <%}%>
+                              
+                                <form class="button_placing" method="post"   action="/profile/<%=CurrentUser._id%>/follower/<%=Follower.id%>/remove" >
+                                <button class="removeFromList">Remove</button>
+                                </form>
+                               </div>
+                               <%}%>
+                    
+                     </div> 
+                </div>
+                 </div>
+
+
+       <div class="position_of_notification">         
+           <div class="notification">
+                <h1 id="notification_bar">Notification <img id="pop_notice"  <%if(request.length===0){%>src="/images/bell.png"<%}else{%>src="/images/notification (1).png"<%}%>></h1>
+                <div id="request">
+
+
+
+             <% if(request.length===0){%><img id="empty_icon" src="/images/box.png"><h2 id="emptyheading">No Notification</h2><p id="emptytext">You currently don’t have any new notifications right now</p><%}else{%>   <%for(request of request){%>
+                <div class="attach2">
+                    <div class="person_request">
+                        <img class="requested_profile" src="<%=request.profile[0].url%>">
+                        <h3 class="requested_person"><%=request.username%><% if (request.Followers.length <=3) {%>
+                            <img id="crown" src="/images/6.png">
+                        <%}if (request.Followers.length >= 4 && request.Followers.length < 6) {%>
+                            <img id="crown" src="/images/5.jpeg">
+                        <%}if (request.Followers.length>= 6 && request.Followers.length < 8) {%>
+                            <img id="crown" src="/images/4.jpeg">
+                        <%}if (request.Followers.length >= 8 && request.Followers.length < 10) {%>
+                            <img id="crown" src="/images/3.png">
+                        <%}if (request.Followers.length >= 10 && request.Followers.length < 12) {%>
+                            <img id="crown" src="/images/2.jpg">
+                        <%}if (request.Followers.length >= 12) {%>
+                            <img id="crown" src="/images/1.jpg">
+                        <%}%></h3>
+                    </div>
+                    <form class="button_placing" method="post" action="/profile/<%=user.id%>/find_people/<%=request.id%>/accept" >
+                    <button class="accept_button"><img class="accept_icon" src="/images/check-circle.png"></button>
+                     </form>
+                    <form class="button_placing" method="post" action="/profile/<%=user.id%>/find_people/<%=request.id%>/reject">
+                    <button class="reject_button"><img  class="reject_icon" src="/images/circle-xmark (1).png"></button>
+                    </form>
+                   </div>
+                
+                <%}%><%}%>     
+          
+                   
+                    
+    
+                </div>
+            </div> 
+       </div>
+    
+
+   
+      <div>
+       
+        <div class="post-sections">
+           <%if(user.posts.length === 0){%><h1 id="no_post">Not Yet Posted</h1><%}%>
+           <% for(post of user.posts.reverse()){%> 
+            <a href="/profile/<%=user.id%>/dish/<%=post.id%>">
+                <img class="posted-image" src="<%=post.path[0].url%>" >
+             </a>
+            <%}%>
+       </div>
+    </div>
+
+    </div>
+ 
+   
+
+ <br>
+ <br>
+
+ <script src="/js/profile.js"></script>
+
+
+</body>
+</html>

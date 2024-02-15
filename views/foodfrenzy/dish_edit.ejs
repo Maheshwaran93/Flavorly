@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="\css\edit.css">
+    <link rel="stylesheet" href="\css\head.css">
+    <title>FoodFrenzy</title>
+</head>
+<body>
+    <%-include('../particals/head')%>
+    
+    <form id="myForm" action="/profile/<%=user%>/dish/<%=dish.id%>/edit?_method=PATCH" method="post">
+        <div class="content_alignment">
+            <div class="content_box">
+                <img class="posted_image" src="<%=dish.path[0].url%>"  >
+                <input type="text" class="dish_heading" value="<%=dish.name%>" maxlength="22" id="name" name="name" required>
+                <textarea class="dish_description " id="description" name="description" maxlength="2500" required><%=dish.description%></textarea>
+            </div>
+        </div>
+               
+       
+    </form>
+    <div class="buttons">
+        <div class="button_position">
+            <div class="Back_div"><a class="Back" href="/profile/<%=user%>/dish/<%=dish.id%>">Back</a>
+               
+        </div>
+        <button id="Confirm_button">Confirm</button>
+
+    </div>
+
+    
+    <script>
+        const externalBtn = document.getElementById("Confirm_button");
+        const myForm = document.getElementById("myForm");
+        externalBtn.addEventListener("click", function() {
+        myForm.submit();
+});
+const description=document.querySelector('#description')
+     description.addEventListener("input", () => {
+    const inputValue = description.value;
+    const sanitizedValue = inputValue.replace(/[^a-zA-Z0-9!@#$%^&*()_ +{}\[\]:;<>,.?~\\/-]/g, "");
+    description.value = sanitizedValue;
+});
+const name=document.querySelector('#name')
+    name.addEventListener("input", () => {
+    const inputValue = name.value;
+    const sanitizedValue = inputValue.replace(/[^a-zA-Z0-9!@#$%^&*()_ +{}\[\]:;<>,.?~\\/-]/g, "");
+    name.value = sanitizedValue;
+});
+    </script>
+ 
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="\css\profile.css">
+    <link rel="stylesheet" href="\css\head.css">
+</head>
+<body>
+    <%-include('../particals/head')%>
+   
+  
+    <div class="section">
+      
+      
+        <div class="profile">
+          
+            <div class="profile_photo">
+                  
+                 <img class="photo" src="<%=user.profile[0].url%>"> 
+                 
+            </div>
+            
+            <div class="profile_details">
+                <h1 id="name"><%=user.username%></h1>
+                <div id="detail">
+                    <div id="Following" class="straight_align">
+                     <h3 id="color"><%=user.Following.length%></h3>
+                     <h3>Following</h3>
+                    </div>
+                    <div id="Followers">
+                        <h3 id="color"><%=user.Followers.length%></h3>
+                        <h3>Followers</h3>
+                    </div>
+                    <div id="spacing_left"class="straight_align">
+                        <% if (user.Followers.length <=3) {%>
+                            <img id="crown" src="/images/6.png">
+                        <%}if (user.Followers.length >= 4 && user.Followers.length < 6) {%>
+                            <img id="crown" src="/images/5.jpeg">
+                        <%}if (user.Followers.length >= 6 && user.Followers.length < 8) {%>
+                            <img id="crown" src="/images/4.jpeg">
+                        <%}if (user.Followers.length >= 8 && user.Followers.length < 10) {%>
+                            <img id="crown" src="/images/3.png">
+                        <%}if (user.Followers.length >= 10 && user.Followers.length < 12) {%>
+                            <img id="crown" src="/images/2.jpg">
+                        <%}if (user.Followers.length >= 12) {%>
+                            <img id="crown" src="/images/1.jpg">
+                        <%}%>
+                        <h3>Crown</h3>
+                    </div>
+                </div>
+                <p><%=user.about%></p>
+                
+            
+            </div>
+    
+        </div>
+
+
+
+     
+    
+
+   
+      <div>
+       
+        <div class="post-sections">
+           <%if(user.posts.length === 0){%><h1 id="no_post">Not Yet Posted</h1><%}%>
+           <% for(post of user.posts.reverse()){%> 
+            <a href="/profile/<%=CurrentUser.id%>/dish/<%=post.id%>">
+                <img class="posted-image" src="<%=post.path[0].url%>" >
+           
+             </a>
+            <%}%>
+       </div>
+    </div>
+
+    </div>
+ 
+   
+
+ <br>
+ <br>
+
+
+
+</body>
+</html>

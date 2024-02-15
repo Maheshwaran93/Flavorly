@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="\css\head.css">
+    <link rel="stylesheet" href="\css\editProfile.css">
+    <title>Document</title>
+</head>
+<body>
+    <%-include('../particals/head' )%>
+    <div id="moveDiv"><div id="loading"></div></div>
+
+ <div class="contentBox">
+
+    <form class="editBox" enctype="multipart/form-data" id="Myform" action="/profile/<%=user.id%>/editProfile" method="post">
+       
+<div>
+   <input type="file"  accept="image/*"  name="profile" id="fileInput" class="hidden-input" >
+       <img id="profilePicture" src="<%=user.profile[0].url%>">
+       <label for="fileInput"><img id="editButton" src="/images/pencil.png"></label> 
+    </div>
+      
+
+      <div class="textInputs">
+        <label for="username" class="label">Username</label>
+        <input id="username" <%if(typeof values !== 'undefined'){%>value="<%=values.username%>"<%}%> name="username" maxlength="16" value="<%=user.username%>" required>
+        <%if(typeof error !== 'undefined'){%><h6 >username is already registered</h6><%}%>
+        <h6 style="display: none;" id="rules"></h6>
+      </div>
+      <div>
+        <label  for="userAbout" class="label">About</label>
+        <textarea name="about" id="userAbout"  <%if(typeof values !== 'undefined'){%>value="<%=values.about%>"<%}%> maxlength="340" required> <%=user.about%></textarea>
+      </div>
+
+      <div>
+        <a href="/profile/<%=user.id%>" id="backButton">Back</a>
+        <button id="ConfirmButton">Confirm</button>
+      </div>
+    </form>
+    
+
+ </div>
+</body>
+<script src="/js/editProfile.js">
+
+</script>
+</html>

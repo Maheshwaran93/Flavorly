@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="\css\head.css">
+    <link rel="stylesheet" href="\css\savedPost.css">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <%-include('../particals/head' )%>
+   
+    <!-- <div class="contentBox"><a id="ancTag"><img id="backButton" src="/images/back.png"></a></div> -->
+
+<div class="contentBox">
+    
+    <div class="post-sections">
+        <%if(savedPostIds.length === 0){%><h1 id="no_post">You Saved No Post</h1><%}%>
+        <% for(post of savedPosts.reverse()){%> 
+            <a href="/profile/<%=user.id%>/search_recipie/<%=post.id%>">
+                <img class="posted-image" src="<%=post.path[0].url%>" >
+             </a>
+            <%}%>
+    </div>
+</div>
+</body>
+</html>

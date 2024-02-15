@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="\css\add.css">
+    <link rel="stylesheet" href="\css\head.css">
+    <title>Add Dish</title>
+    <link rle="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css">
+</head>
+<style>
+    
+</style>
+<body>
+
+    <%-include('../particals/head')%>
+    <form  id="myForm" enctype="multipart/form-data" action="/profile/<%=id%>/add_dish" method="post" >
+    
+      <div id="alignMiddle">
+        <label for="fileInput" id="editLabel" style="display: none;"><img id="editImage" src="/images/edit-image.png"></label>
+          <div id="content_box">
+
+              <div id="UploadImage">
+                  <div class="custom-input">
+                      <input type="file"  accept="image/*" name="path" id="fileInput" class="hidden-input">
+                      <label for="fileInput"><img class="styled-button" src="/images/add (1).png"></label>
+                  </div>
+                  <label id="label">Upload your image</label>
+                  <img  id="UploadedImage" src="https://upload.wikimedia.org/wikipedia/en/9/99/Solo_Leveling_Webtoon.png" >
+              </div>
+              <div id="WritingStuff">
+                  <input id="Heading" type="text" name="name" placeholder="Heading" maxlength="22" required>
+                  <textarea id="Paragraph" placeholder="Type your content..." name="description" required></textarea>
+              </div>
+          </div>
+      </div>
+      
+      <div id="alignMiddle">
+          <div id="Buttons">
+              <a id="ancTag" href="/profile/<%=id%>" style="display:inline-block;text-decoration:none;color:black;">
+                  <div id="BackButton">Cancel</div>
+              </a>
+              <button id="PostButton">Post</button>
+          </div>
+      </div>
+      
+  </form>
+  <div id="moveDiv"><div id="loading"></div></div>
+
+
+<script  src="/js/addDish.js"></script>
+</body>
+</html>

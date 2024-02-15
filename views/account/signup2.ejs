@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="\css\signup2.css">
+  </head>
+  <body>
+ 
+ <div class="inputBox">
+  <div id="moveDiv"><div id="loading"></div></div>
+
+  <form id="myform" enctype="multipart/form-data"  action="/profile" method="post">     
+    <div class="Mydiv">
+      <input name="email" value="<%=value.email%>">
+      <input name="username" value="<%=value.username%>">
+      <input name="password" value="<%=value.password%>">
+    </div>
+      <div class="custom-input">
+                      <input type="file"  accept="image/*"  name="profile" id="fileInput" class="hidden-input" required>
+                      <label id="label" for="fileInput"><img id="profileIcon" src="/images/istockphoto.jpg"></label>
+                      <label id="label_2" for="fileInput" style="display: none;"><img id="editIcon" src="/images/pencil.png"></label>
+                  </div>
+    <!-- <input id="img" name="profile" placeholder="Profile image link..." required> -->
+    <img  id="UploadedImage"  src="" >
+
+<h2 id="Username"><%=value.username%></h2>
+<input maxlength="340" placeholder="Write about you..." name="about" id="about" required>
+<button>Confirm</button>
+ </form>
+ <a href="/login"><button id="signup">sign In</button></a>
+   
+ </div>
+
+
+  <script>
+    const about=document.querySelector('#about')
+    const moveDiv =document.querySelector('#moveDiv')
+    const myform =document.querySelector('#myform')
+    const editIcon =document.querySelector('#label_2')
+
+    about.addEventListener("input", () => {
+    const inputValue = about.value;
+    const sanitizedValue =inputValue.replace(/[^a-zA-Z0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\/-\s]/g, "");
+    about.value = sanitizedValue;
+});
+
+
+myform.addEventListener('submit',()=>{
+  moveDiv.style.display ='block'
+  inputBox.style.pointerEvents='none'
+  editIcon.style.pointerEvents='none'
+
+})
+
+
+const image=document.querySelector('#UploadedImage')
+const label_2=document.querySelector('#label_2')
+// const UploadImage=document.querySelector('.custom-input')
+const label=document.querySelector('#label')
+const  input=document.querySelector('#fileInput');input.addEventListener('change',()=>{
+    if (input.files.length !==0) {
+      const selectedFile = input.files[0];
+      const fileURL = URL.createObjectURL(selectedFile);
+  
+//       UploadImage.style.display = 'none';
+      label.style.display = 'none';
+      image.style.display = 'block';
+     label_2.style.display = 'block'
+      image.src = fileURL;
+} else {
+  console.log('No file has been selected.');
+}
+})
+
+
+  </script>
+
+  </body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="\css\show.css" />
+    <link rel="stylesheet" href="\css\head.css" />
+    <title>FoodFrenzy</title>
+    <style>
+      .speech-bubble {
+          
+          background-color: #007bff;
+          color: #fff;
+          padding: 10px 10px 15px 10px;
+
+          border-radius: 10px;
+          height: 10px;
+          position: absolute;
+          top: -18px;
+          left: -1px;
+          display: none;
+        
+        
+      }
+
+      .speech-bubble::before {
+          content: "";
+          position: absolute;
+          top: 100%;
+          left: 40px;
+          margin-left: -10px; /* Adjust to arrow width */
+          border-width: 10px;
+          border-style: solid;
+          border-color: #007bff transparent transparent transparent;
+       
+      }
+  </style>
+  </head>
+  <body>
+    <%-include('../particals/head')%>
+    
+    <div class="content_alignment">
+  
+      <div class="content_box">
+
+        <img class="posted_image" src="<%=choosedDish.path[0].url%>">
+        <h1 class="dish_heading"><%=choosedDish.name%></h1>
+        <h3 class="dish_description"><%=choosedDish.description%></h3>
+      </div>
+      <% if(CurrentUser && !CurrentUser._id.equals(choosedDish.author)){%> 
+
+        <div class="icons">
+          <div>
+            <img src="<%=author%>" id="ownerPhoto" class="check">
+            <div class="speech-bubble">
+             <%=authorName%>
+          </div> 
+          </div>
+          <% if (user.savedPost.includes(choosedDish.id)) { %>
+            <form id="saveForm" method="post" action="/profile/<%=CurrentUser._id%>/Search_Recipie/<%=choosedDish.id%>/remove">
+              <img src="/images/save-instagram.png" id="save" class="check2">
+          </form>
+        <% } else { %>
+          <form id="saveForm" method="post" action="/profile/<%=CurrentUser._id%>/Search_Recipie/<%=choosedDish.id%>/save">
+            <img src="/images/save-instagram2.png" id="save" class="check2">
+        </form>
+         
+        <% } %>
+       
+        <img src="/images/faq.png" id="check3" class="check">
+
+     </div>
+   
+    
+  <%}%>
+    </div>
+    <% if(CurrentUser && !CurrentUser._id.equals(choosedDish.author)){%>
+      <div class="emojis">
+        <div id="emojis_collections">
+          <div id="emojis_background">
+            <% if (choosedDish.icons.icon1.includes(CurrentUser._id) ||choosedDish.icons.icon2.includes(CurrentUser._id) ||choosedDish.icons.icon3.includes(CurrentUser._id) ||choosedDish.icons.icon4.includes(CurrentUser._id) ||choosedDish.icons.icon5.includes(CurrentUser._id)) { %>
+  
+              <% if(choosedDish.icons.icon1.includes(CurrentUser._id)){%><form action="/profile/<%=CurrentUser._id%>/search_recipie/<%=choosedDish.id%>/1/remove" method="post"><button class="emojiButtonclicked">&#10084;&#xFE0F;</button></form><h4 class="h4Count"><%=(choosedDish.icons.icon1).length%></h4><%}else{%><button class="emojiButtonLocked">&#10084;&#xFE0F;</button><h4 class="h4Count"><%=(choosedDish.icons.icon1).length%></h4><%}%> 
+              <% if(choosedDish.icons.icon2.includes(CurrentUser._id)){%><form action="/profile/<%=CurrentUser._id%>/search_recipie/<%=choosedDish.id%>/2/remove" method="post"><button class="emojiButtonclicked">&#128523;</button></form><h4  class="h4Count"><%=(choosedDish.icons.icon2).length%></h4></h3><%}else{%><button class="emojiButtonLocked">&#128523;</button><h4 class="h4Count"><%=(choosedDish.icons.icon2).length%></h4><%}%> 
+              <% if(choosedDish.icons.icon3.includes(CurrentUser._id)){%> <form action="/profile/<%=CurrentUser._id%>/search_recipie/<%=choosedDish.id%>/3/remove" method="post"><button class="emojiButtonclicked">&#129316;</button></form><h4 class="h4Count"><%=(choosedDish.icons.icon3).length%></h4></h3><%}else{%><button class="emojiButtonLocked">&#129316;</button><h4 class="h4Count"><%=(choosedDish.icons.icon3).length%></h4><%}%> 
+              <% if(choosedDish.icons.icon4.includes(CurrentUser._id)){%> <form action="/profile/<%=CurrentUser._id%>/search_recipie/<%=choosedDish.id%>/4/remove" method="post"><button class="emojiButtonclicked">&#128293;</button></form><h4 class="h4Count"><%=(choosedDish.icons.icon4).length%></h4></h3><%}else{%><button class="emojiButtonLocked">&#128293;</button><h4 class="h4Count"><%=(choosedDish.icons.icon4).length%></h4><%}%>
+              <% if(choosedDish.icons.icon5.includes(CurrentUser._id)){%> <form action="/profile/<%=CurrentUser._id%>/search_recipie/<%=choosedDish.id%>/5/remove" method="post"><button class="emojiButtonclicked">&#128077;</button></form><h4 class="h4Count"><%=(choosedDish.icons.icon5).length%></h4></h3><%}else{%><button class="emojiButtonLocked">&#128077;</button><h4 class="h4Count"><%=(choosedDish.icons.icon5).length%></h4><%}%>   
+  
+  
+            <% }else{%>
+    
+              <form action="/profile/<%=CurrentUser._id%>/search_recipie/<%=choosedDish.id%>/1/post" method="post"><button class="emojiButton">&#10084;&#xFE0F;</button></form><h4 class="h4Count"><%=(choosedDish.icons.icon1).length%></h4>
+              <form action="/profile/<%=CurrentUser._id%>/search_recipie/<%=choosedDish.id%>/2/post" method="post"><button class="emojiButton">&#128523;</button></form><h4 class="h4Count"><%=(choosedDish.icons.icon2).length%></h4>
+              <form action="/profile/<%=CurrentUser._id%>/search_recipie/<%=choosedDish.id%>/3/post" method="post"><button class="emojiButton">&#129316;</button></form><h4 class="h4Count"><%=(choosedDish.icons.icon3).length%></h4> 
+              <form action="/profile/<%=CurrentUser._id%>/search_recipie/<%=choosedDish.id%>/4/post" method="post"><button class="emojiButton">&#128293;</button></form><h4 class="h4Count"><%=(choosedDish.icons.icon4).length%></h4> 
+              <form action="/profile/<%=CurrentUser._id%>/search_recipie/<%=choosedDish.id%>/5/post" method="post"><button class="emojiButton">&#128077;</button></form><h4 class="h4Count"><%=(choosedDish.icons.icon5).length%></h4> 
+              <%}%>
+  
+  
+         
+      </div>
+      </div>
+      </div><%}%>
+      <% if(CurrentUser && CurrentUser._id.equals(choosedDish.author)){%>
+        <div class="emojis">     
+           <div id="emojis_collections">   
+             <div id="emojis_background">
+              <button class="emojiButton">&#10084;&#xFE0F;</button><h4 class="h4Count"><%=(choosedDish.icons.icon1).length%></h4>
+              <button class="emojiButton">&#128523;</button><h4 class="h4Count"><%=(choosedDish.icons.icon2).length%></h4>
+              <button class="emojiButton">&#129316;</button><h4 class="h4Count"><%=(choosedDish.icons.icon3).length%></h4> 
+              <button class="emojiButton">&#128293;</button><h4 class="h4Count"><%=(choosedDish.icons.icon4).length%></h4> 
+              <button class="emojiButton">&#128077;</button><h4 class="h4Count"><%=(choosedDish.icons.icon5).length%></h4> 
+             </div>    
+            </div>
+          </div>
+        
+        <%}%>
+  
+    <% if(CurrentUser && CurrentUser._id.equals(choosedDish.author)){%> 
+    <div class="buttons">
+      <form
+        action="/profile/<%=user._id%>/dish/<%=choosedDish.id%>/delete?_method=DELETE"
+        method="post"
+      >
+        <button class="delete_button">Delete</button>
+      </form>
+      <div class="edit_button_div">
+        <a class="edit_button" href="/profile/<%=user._id%>/dish/<%=choosedDish.id%>/edit">Edit</a>
+      </div>
+    </div><%}%>
+
+   
+    <div class="query_center">
+      
+      <form method="post" action="/profile/<%=CurrentUser._id%>/search_recipie/<%=choosedDish.id%>/review" id="query_form" >
+    <div class="query_box">
+     <div class="query_person_adjustment"><img class="query_person"  src="<%=user.profile[0].url%>"></div>
+     <div class="query_section">
+               <h3 class="person_name" ><%=user.username%></h3>     
+                   <textarea type="text" name="query" id="extra_piece" class="query" placeholder="Type the query..."  maxlength="200" required></textarea>
+                  
+                </div> 
+                <div class="common-alignment">  <button class="transparent-button"><img class="send_icon"src="/images/direct.png"></button></div> 
+    </div>
+    
+    </form>
+  </div>
+
+
+<div class="div">
+  <%if(choosedDish.review.length!=0){%>
+    <%for(querys of choosedDish.review.reverse()){%>  <div class="review_alignment">
+     
+      <% if (!querys.answer=='') { %>
+      
+        <div >
+          <div <%if(querys.query.length>140){%>class="query_rised_afteranwer"<%}else{%>class="query_rised_afteranwer2"<%}%> >
+            <div class="query_person_adjustment"><img class="query_person" src="<%=querys.profile%>"></div>
+            <div class="query_section">
+              <h3 class="person_name" ><%=querys.queryPerson%></h3> 
+              <p class="query"><%=querys.query%> </p>
+              <div class="jet">
+                <%if(CurrentUser && CurrentUser._id.equals(choosedDish.author)){%>   
+                    
+                  <!-- <button class="commentButton"><img class="commentButton_image" src="/images/reply.png"></button> -->
+              
+                  <%}else{%>
+                    <%if(CurrentUser && CurrentUser._id.equals(querys.queryPersonid)){%>
+                      <form method="post" action="/profile/<%=user._id%>/search_recipie/<%=choosedDish.id%>/reviews/<%=querys.id%>/delete?_method=DELETE"> 
+                        <button class="deleteButton"><img class="deleteButton_image" src="/images/bin.png"></button>
+                        </form><%}%>
+                
+                  <%}%>
+                </div>
+            </div>
+           
+            <div class="replyed">
+              <div class="anwer_person_adjustment"><img class="query_person" src="<%=querys.answerperson%>"></div>
+              <div class="combine">
+              <h3 class="replyer_name"><%=querys.owner%></h3>
+              <h3 name="answer"  class="answered_box"><%=querys.answer%></h3>
+            </div>
+           
+          </div>
+            
+          </div>
+                </div>
+      <% }  else { %>
+    <div class="cover_things">
+      <div class="query_rised">
+        <div class="query_person_adjustment"><img class="query_person" src="<%=querys.profile%>"></div>
+        <div class="query_section">
+          <h3 class="person_name" ><%=querys.queryPerson%></h3> 
+          <p class="query"><%=querys.query%> </p>
+          <div class="jet">
+               
+            <%if(CurrentUser && CurrentUser._id.equals(choosedDish.author)){%>   
+                
+              <button class="commentButton"><img class="commentButton_image" src="/images/reply.png"></button>
+           
+              <%}else{%>
+                <%if((CurrentUser && CurrentUser._id.equals(querys.queryPersonid))){%>
+                  <form method="post" action="/profile/<%=user._id%>/search_recipie/<%=choosedDish.id%>/reviews/<%=querys.id%>/delete?_method=DELETE"> 
+                    <button class="deleteButton"><img class="deleteButton_image" src="/images/bin.png"></button>
+                    </form><%}%>
+              
+              <%}%>
+            </div>
+        </div>
+       
+        <form class="reply" method="post" action="/profile/<%=user._id%>/search_recipie/<%=choosedDish.id%>/review/<%=querys._id%>/reply">
+          <div class="anwer_person_adjustment"><img class="query_person" src="<%=user.profile[0].url%>"></div>
+          <div class="combine">
+          <h3 class="replyer_name1"><%=user.username%></h3>
+          <textarea name="answer"  placeholder="Write your reply..."   required class="answer_box"></textarea>
+          <button id="send_button"><img  id="send-message" src="/images/send-message (1).png"></button>
+        </div>
+     
+        </form>
+        
+      </div>
+            </div>
+           
+             </div> 
+        
+      <% } %>
+
+
+      <%}%>
+  <%}%>
+
+
+    
+<script src="/js/view.js" >
+
+
+  </script>
+  </body>
+</html>

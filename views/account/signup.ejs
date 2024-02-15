@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="\css\signup.css">
+  </head>
+  <body>
+ 
+ <div class="inputBox">
+    <p>"Discover an exquisite blend of flavors and spices!<br>Sign up now to unlock a world of culinary delights."</p>
+  <button id="explore"><a>Explore the site</a><img src="/images/cherry.png"></button>
+
+   
+    <h2>Create an <span>account</span></h2> 
+   
+      
+<div id="input_alignment">
+   <form id="form" action="register" method="post">
+  <div><img src="/images/email.png" id="email_image"><input placeholder="Email"   <%if(typeof values !== 'undefined'){%>value="<%=values.email%>"<%}%>  name="email" type="email" id="email" minlength="12" maxlength="50" required></div>
+  <div> <img src="/images/user.png" id="person_image"> <input placeholder="Username" <%if(typeof values !== 'undefined'){%>value="<%=values.username%>"<%}%> name="username" id="username" maxlength="16"  type="text" required><%if(typeof error !== 'undefined'){%><h6 >username is already registered</h6><%}%></div><h6 style="display: none;" id="rules"></h6>
+ <div><img src="/images/visible.png" id="padlock_image"><input placeholder="Password" <%if(typeof values !== 'undefined'){%>value="<%=values.password%>"<%}%> type="password" id="password" maxlength="16"  name="password" required></div><h6 style="display: none;" id="passwordrules"></h6>
+</form>
+ </div>
+ <button id="submitButton" type="button">Create account</button>
+ <a href="/login"><button id="login">Login</button></a>
+ </div>
+<script >
+
+ var button = document.getElementById("submitButton");
+ const email=document.querySelector('#email');
+ const username=document.querySelector('#username');
+ const password=document.querySelector('#password'); 
+ const padlock_image=document.querySelector('#padlock_image');
+ const rules=document.querySelector('#rules')
+ const passwordrules=document.querySelector('#passwordrules')
+ var form = document.getElementById("form");
+let visible=0;
+
+ padlock_image.addEventListener('click',()=>{
+
+  if(visible==0){
+
+    document.querySelector('#padlock_image').src="/images/visibility.png";
+    document.querySelector('#password').type="text";
+   
+    visible=1;
+  }
+  else{
+    document.querySelector('#padlock_image').src="/images/visible.png" ;
+    document.querySelector('#password').type="password";
+    visible=0;
+  }
+ })
+
+username.addEventListener("input", () => {
+    const inputValue = username.value;
+    const sanitizedValue = inputValue.replace(/[^a-zA-Z0-9_]/g, "");
+
+    username.value = sanitizedValue;
+});
+password.addEventListener("input", () => {
+    const inputValue = password.value;
+    const sanitizedValue = inputValue.replace(/[^a-zA-Z0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/g, "");
+
+    password.value = sanitizedValue;
+});
+
+button.addEventListener("click", ()=>{
+  rules.style.display="none";
+  passwordrules.style.display="none"
+  const startsWithNumber = /^[0-9]/.test(username.value);
+  const hasSymbol = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(password.value);
+      if(username.value.length<7){
+        rules.style.display="block"
+       return rules.textContent="Username must be great than 6 character"
+      }
+    else if(startsWithNumber) {
+      rules.style.display="block"
+      return rules.textContent="Username should not start with a number."
+    }
+    else if(password.value.length < 7) {
+      passwordrules.style.display="block"
+      return passwordrules.textContent="Password should be at least 6 characters long."
+    }
+    else if(!hasSymbol) {
+      passwordrules.style.display="block"
+      return  passwordrules.textContent="Password should contain at least one symbol."
+    }
+    else{
+      rules.style.display="none";
+      passwordrules.style.display="none"
+      return form.submit();
+    
+    }
+})
+
+
+// Test cases
+// console.log(isValidUsername("john123"));  // Username is valid.
+// console.log(isValidUsername("123john"));  // Username should not start with a number.
+// console.log(isValidUsername("abc"));  // Username should be at least 6 characters long.
+
+
+
+</script>
+
+  </body>
+</html>

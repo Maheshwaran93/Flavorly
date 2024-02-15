@@ -1,0 +1,106 @@
+*{
+    margin:0;
+   padding: 0;
+}
+html,
+body {
+ height: 100%;
+
+}
+body{
+   background-image: url('/images/adrian-infernus-GLf7bAwCdYg-unsplash.jpg');
+   background-size: cover;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-position: center;
+ 
+   
+}
+.inputBox{
+    background-color: white;
+    width: 500px;
+    height: 500px;
+    border-radius: 15px;
+   box-shadow: 8px 8px 4px rgba(0, 0, 0, 0.25);
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   font-family: 'inter', sans-serif;
+  
+   
+}
+p{
+    margin-top: 50px;
+    font-family: 'roboto_flex', sans-serif;
+    width: 400px;
+    text-align: center;
+
+}
+span{
+    color: rgba(214, 37, 37, 1);
+}
+#input_alignment{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+   
+  }
+#form{
+  display: flex;
+  flex-direction: column;
+ gap: 10px;
+
+}
+#email_image,#person_image,#padlock_image{
+    width: 20px;
+    height: 20px;
+    position:relative;
+    left:20px;
+    top:5px;
+  }
+  
+input{
+    width: 310px;
+    height: 40px;
+    border: 1px solid rgba(128, 128, 128, 1);
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    outline: none;
+    font-size: 15px;
+    padding: 0px 0px 0px 35px;
+  
+  }
+#submitButton{
+    width: 350px;
+    height: 30px;
+    position: relative;
+    left: 15px;
+   border-radius: 5px;
+   border: none;
+   background-color: rgba(245, 71, 72, 1);
+   color:white;
+   margin-top: 45px;
+  }
+  #signUp{
+    width: 350px;
+    height: 30px;
+    position: relative;
+    left: 15px;
+   border-radius: 5px;
+   border: none;
+   background-color: rgba(217, 217, 217, 1);
+   top:5px;
+  }
+  h2{
+    font-weight: 500;
+    margin-top: 50px;
+  }
+  h4{
+    color: rgba(245, 71, 72, 1);
+    margin-bottom: 10px;
+  }
+  

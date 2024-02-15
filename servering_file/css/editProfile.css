@@ -1,0 +1,154 @@
+*{
+    margin: 0;
+    padding: 0;
+
+}
+body{
+    font-family: 'inter',sans-serif;
+}
+#moveDiv{
+    transform: translate(700px,250px);
+    display: none;
+  
+  position: absolute;
+  }
+  #loading {
+    width: 8vmax;
+    height: 8vmax;
+    border-radius: 100%;
+    animation: spinRight 800ms linear infinite;
+    position: absolute;
+  
+    
+    &:before, &:after {
+      content: '';
+      width: 6vmax;
+      height: 6vmax;
+      display: block;
+      position: absolute;
+      top: calc(50% - 3vmax);
+      left: calc(50% - 3vmax);
+      border-left: 3px solid rgba(245, 71, 72, 1);
+      border-radius: 100%;
+      animation: spinLeft 800ms linear infinite;
+      
+    }
+    
+    &:after {
+      width: 4vmax;
+      height: 4vmax;
+      top: calc(50% - 2vmax);
+      left: calc(50% - 2vmax);
+      border: 0;
+      border-right: 3px solid rgba(245, 71, 72, 1);
+      animation: none;
+    }
+  }
+  
+  @keyframes spinLeft {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(720deg);}
+  }
+  
+  @keyframes spinRight {
+    from {transform:rotate(360deg);}
+    to {transform:rotate(0deg);}
+  }
+.contentBox{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+h6{
+    position:relative;left: 25px;font-weight: 500;font-size:smaller;color: rgb(222, 84, 84);
+  }
+  .hidden-input{
+    display: none;
+  }
+.editBox{
+ margin-top: 50px;
+    width: 500px;
+    height: 600px;
+    border: 1px solid rgb(157, 155, 155);
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 30px;
+}
+#profilePicture{
+    width: 200px;
+    height: 200px;
+    border-radius: 15px;
+    margin-top: 18px;
+    
+   
+
+}
+#editButton{
+    width: 35px;
+    height: 35px;
+   position: absolute;
+   transform: translate(-18px, 198px);
+  
+}
+.label{
+   display: block;
+   color: #808080;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+position: relative;
+left: 15px;
+bottom:  5px;
+}
+.textInputs{
+    margin-top: 30px;
+}
+#username{
+    border: 1px solid #BAB8B8;
+    width: 330px;
+    height: 35px;
+    font-size: 17px;
+    padding-left: 20px;
+ 
+    
+}
+
+#userAbout{
+    width: 330px;
+    height: 103px;
+    resize: none;
+    color:rgba(128, 128, 128, 1);
+    font-size: 16px;
+    padding: 5px 10px 10px 10px;
+    border: 1px solid #BAB8B8;
+    
+ 
+}
+#userAbout::-webkit-scrollbar {
+    display: none;
+  }
+  #backButton{
+    text-decoration: none;
+    color: black;
+    background-color: rgba(217, 217, 217, 1);
+    border-radius: 5px;
+    
+    padding: 10px 15px 13px 15px;
+    margin-left: 200px;
+  }
+  #ConfirmButton{
+    background-color: rgba(245, 71, 72, 1);
+    border-radius: 5px;
+width:70px ;
+height: 40px;
+border: none;
+color: white;
+
+  }

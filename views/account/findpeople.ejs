@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link rel="stylesheet" href="\css\head.css" >
+    <link rel="stylesheet" href="\css\search.css">
+</head>
+<body>
+
+        <%-include('../particals/head')%>
+   
+        <div class="search">
+            <input  class="input" type="text" placeholder="Find people...">
+            <div id="icon_backgound">
+             <img  class="search_icon" src="/images/search (1).png">
+         </div>  
+        
+        </div>
+       <div class="alignment">
+<div class="account">
+ 
+<!-- <%for(account of accounts){%>
+
+
+        <% if (user_id.Following.includes(account.id)) { %>
+            <form  method="get"  id="person_account" action="/profile/<%=CurrentUser._id%>/find_people/<%=account.id%>/view">
+            <div class="person_account">
+                <img class="profile_image" src="<%=account.profile%>">
+                <div class="profile_details">
+                    <div class="align_center1"><h3 class="profile_name"><%=account.username%><img class="crown" src="/images/1.jpeg"></h3></div>
+                    <div class="profile_counts">
+                        <div class="align_center"><h3 class="count"><%=account.Following.length%></h3><h3 class="type_count">Following</h3></div>
+                        <div class="align_center"><h3 class="count"><%=account.Followers.length%></h3><h3 class="type_count">Followers</h3></div>
+                       
+                    </div>
+                   
+                </div>
+                
+            </div>
+            </form> 
+            <% }else{%>
+                
+                
+            <div class="person_account">
+            <img class="profile_image" src="<%=account.profile%>">
+            <div class="profile_details">
+                <div class="align_center1"><h3 class="profile_name"><%=account.username%><img class="crown" src="/images/1.jpeg"></h3></div>
+                <div class="profile_counts">
+                    <div class="align_center"><h3 class="count"><%=account.Following.length%></h3><h3 class="type_count">Following</h3></div>
+                    <div class="align_center"><h3 class="count"><%=account.Followers.length%></h3><h3 class="type_count">Followers</h3></div>
+                   
+                </div>
+               
+            </div>
+           
+            <% if (sendRequest.includes(account.id)) { %>
+                <form  class="form1" method="post" action="/profile/<%=CurrentUser._id%>/find_people/<%=account.id%>/cancel">
+           
+                <button type="submit" id="remove_button" class="add_button"><img class="add" src="/images/time-left.png"></button>
+            </form>
+            <% } else { %>
+                <form method="post" class="form2" action="/profile/<%=CurrentUser._id%>/find_people/<%=account.id%>">
+                    <button type="submit" id="add_button"class="add_button"><img class="add" src="/images/add (1).png"></button>
+                </form>
+            <% } %>
+                    
+           </div> 
+                <%}%>
+        
+ 
+           
+           
+           
+           <%}%>   -->
+         
+</div>
+
+  
+
+</div>
+<script  >
+
+
+    var accounts = <%- JSON.stringify(accounts) %>;
+    var sendRequest = <%- JSON.stringify(sendRequest) %>;
+    var user_id = <%- JSON.stringify(user_id) %>;
+  const push=document.querySelector('.account')
+  
+  
+  function f1(data,searchInput){
+    const parentElement = document.querySelector(".account");
+      parentElement.innerHTML=''
+   
+    for(account of data){
+    if (user_id.Following.includes(account._id)){
+  
+  const form = document.createElement("form");
+  form.setAttribute("method", "get");
+  form.setAttribute("id", "person_account");
+  form.setAttribute("action", `/profile/${user_id._id}/find_people/${account._id}/view`);
+  const div = document.createElement("div");
+  div.setAttribute("class", "person_account");
+  const img = document.createElement("img");
+  img.setAttribute("class", "profile_image");
+  img.setAttribute("src", `${account.profile[0].url}`);
+  const div2 = document.createElement("div");
+  div2.setAttribute("class", "profile_details");
+  const div3 = document.createElement("div");
+  div3.setAttribute("class", "align_center1");
+  const h3 = document.createElement("h3");
+  h3.setAttribute("class", "profile_name");
+  h3.textContent = `${account.username}`;
+  const img2 = document.createElement("img");
+  img2.setAttribute("class", "crown");
+
+
+
+
+if (account.Followers.length <= 3) {
+     img2.setAttribute("src", "/images/6.png");
+} else if (account.Followers.length >=4 && account.Followers.length < 6) {
+      img2.setAttribute("src", "/images/5.jpeg");
+} else if (account.Followers.length >= 6 && account.Followers.length < 8) {
+      img2.setAttribute("src", "/images/4.jpeg");
+}else if (account.Followers.length >= 8 && account.Followers.length < 10) {
+      img2.setAttribute("src", "/images/3.png");
+}else if (account.Followers.length >= 10 && account.Followers.length < 12) {
+      img2.setAttribute("src", "/images/2.jpg");
+} else if (account.Followers.length >= 12) {
+    img2.setAttribute("src", "/images/1.jpg");
+}
+
+
+
+
+  
+  h3.appendChild(img2);
+  div3.appendChild(h3);
+  const div4 = document.createElement("div");
+  div4.setAttribute("class", "profile_counts");
+  const div5 = document.createElement("div");
+  div5.setAttribute("class", "align_center");
+  const h31 = document.createElement("h3");
+  h31.setAttribute("class", "count");
+  h31.textContent = `${account.Following.length}`;
+  const h32 = document.createElement("h3");
+  h32.setAttribute("class", "type_count");
+  h32.textContent = "Following";
+  div5.appendChild(h31);
+  div5.appendChild(h32);
+  const div6 = document.createElement("div");
+  div6.setAttribute("class", "align_center");
+  const h33 = document.createElement("h3");
+  h33.setAttribute("class", "count");
+  h33.textContent = `${account.Followers.length}`;
+  
+  const h34 = document.createElement("h3");
+  h34.setAttribute("class", "type_count");
+  h34.textContent = "Followers";
+  
+  div6.appendChild(h33);
+  div6.appendChild(h34);
+  
+  div4.appendChild(div5);
+  div4.appendChild(div6);
+  
+  div2.appendChild(div3);
+  div2.appendChild(div4);
+  
+  div.appendChild(img);
+  div.appendChild(div2);
+  
+  form.appendChild(div);
+  push.appendChild(form)
+   
+  }
+  else{
+    const div = document.createElement("div");
+  div.setAttribute("class", "person_account");
+  const img = document.createElement("img");
+  img.setAttribute("class", "profile_image");
+  img.setAttribute("src", `${account.profile[0].url}`);
+  const div2 = document.createElement("div");
+  div2.setAttribute("class", "profile_details");
+  const div3 = document.createElement("div");
+  div3.setAttribute("class", "align_center1");
+  const h3 = document.createElement("h3");
+  h3.setAttribute("class", "profile_name");
+  h3.textContent = `${account.username}`;
+  const img2 = document.createElement("img");
+  img2.setAttribute("class", "crown");
+
+if (account.Followers.length <= 3) {
+     img2.setAttribute("src", "/images/6.png");
+} else if (account.Followers.length >=4 && account.Followers.length < 6) {
+      img2.setAttribute("src", "/images/5.jpeg");
+} else if (account.Followers.length >= 6 && account.Followers.length < 8) {
+      img2.setAttribute("src", "/images/4.jpeg");
+}else if (account.Followers.length >= 8 && account.Followers.length < 10) {
+      img2.setAttribute("src", "/images/3.png");
+}else if (account.Followers.length >= 10 && account.Followers.length < 12) {
+      img2.setAttribute("src", "/images/2.jpg");
+} else if (account.Followers.length >= 12) {
+    img2.setAttribute("src", "/images/1.jpg");
+}
+
+
+//   img2.setAttribute("src", "/images/1.jpeg");
+
+
+
+
+
+
+
+  h3.appendChild(img2);
+  div3.appendChild(h3);
+  const div4 = document.createElement("div");
+  div4.setAttribute("class", "profile_counts");
+  const div5 = document.createElement("div");
+  div5.setAttribute("class", "align_center");
+  const h31 = document.createElement("h3");
+  h31.setAttribute("class", "count");
+  h31.textContent = `${account.Following.length}`;
+  const h32 = document.createElement("h3");
+  h32.setAttribute("class", "type_count");
+  h32.textContent = "Following";
+  div5.appendChild(h31);
+  div5.appendChild(h32);
+  const div6 = document.createElement("div");
+  div6.setAttribute("class", "align_center");
+  const h33 = document.createElement("h3");
+  h33.setAttribute("class", "count");
+  h33.textContent = `${account.Followers.length}`;
+  const h34 = document.createElement("h3");
+  h34.setAttribute("class", "type_count");
+  h34.textContent = "Followers";
+  div6.appendChild(h33);
+  div6.appendChild(h34);
+  div4.appendChild(div5);
+  div4.appendChild(div6);
+  div2.appendChild(div3);
+  div2.appendChild(div4);
+  if (sendRequest.includes(account._id)) {
+    const form = document.createElement("form");
+    form.setAttribute("class", "form1");
+    form.setAttribute(
+      "action",
+      `/profile/${user_id._id}/find_people/${account._id}/cancel`
+    );
+    form.setAttribute("method", "post");
+  
+    const button = document.createElement("button");
+    button.setAttribute("type", "submit");
+    button.setAttribute("id", "remove_button");
+    button.setAttribute("class", "add_button");
+  
+    const img3 = document.createElement("img");
+    img3.setAttribute("class", "add");
+    img3.setAttribute("src", "/images/time-left.png");
+  
+    button.appendChild(img3);
+    form.appendChild(button);
+    div.appendChild(form);
+  
+  
+    
+  } else{
+    const form2 = document.createElement("form");
+    form2.setAttribute("class", "form2");
+    form2.setAttribute(
+      "action",
+      `/profile/${user_id._id}/find_people/${account._id}`
+    );
+    form2.setAttribute("method", "post");
+  
+    const button2 = document.createElement("button");
+    button2.setAttribute("type", "submit");
+    button2.setAttribute("id", "add_button");
+    button2.setAttribute("class", "add_button");
+  
+    const img4 = document.createElement("img");
+    img4.setAttribute("class", "add");
+    img4.setAttribute("src", "/images/add (1).png");
+  
+    button2.appendChild(img4);
+    form2.appendChild(button2);
+  div.appendChild(form2)
+  
+  
+    
+  }
+  
+  div.appendChild(img);
+  div.appendChild(div2);
+  push.appendChild(div)
+  }
+  }
+  
+  
+  const personAccountElements = document.querySelectorAll('#person_account');
+  personAccountElements.forEach((element) => {
+      element.addEventListener('click', () => {
+          element.submit();
+      });
+  });
+  const forms=document.querySelectorAll('form')
+  forms.forEach(form => {
+    form.addEventListener('submit', event => {
+  
+      setTimeout(function(){
+      location.reload();
+     }, 50);
+    });
+  });
+  
+  
+  }
+  
+  function f2(data,searchInput){
+    const parentElement = document.querySelector(".account");
+      parentElement.innerHTML=''
+   
+    
+    for(account of data){
+    if (user_id.Following.includes(account._id)){
+  
+  const form = document.createElement("form");
+  form.setAttribute("method", "get");
+  form.setAttribute("id", "person_account");
+  form.setAttribute("action", `/profile/${user_id._id}/find_people/${account._id}/view`);
+  const div = document.createElement("div");
+  div.setAttribute("class", "person_account");
+  const img = document.createElement("img");
+  img.setAttribute("class", "profile_image");
+  img.setAttribute("src", `${account.profile[0].url}`);
+  const div2 = document.createElement("div");
+  div2.setAttribute("class", "profile_details");
+  const div3 = document.createElement("div");
+  div3.setAttribute("class", "align_center1");
+  const h3 = document.createElement("h3");
+  h3.setAttribute("class", "profile_name");
+  h3.textContent = `${account.username}`;
+  const img2 = document.createElement("img");
+  img2.setAttribute("class", "crown");
+
+
+
+
+
+
+  if (account.Followers.length <= 3) {
+     img2.setAttribute("src", "/images/6.png");
+} else if (account.Followers.length >=4 && account.Followers.length < 6) {
+      img2.setAttribute("src", "/images/5.jpeg");
+} else if (account.Followers.length >= 6 && account.Followers.length < 8) {
+      img2.setAttribute("src", "/images/4.jpeg");
+}else if (account.Followers.length >= 8 && account.Followers.length < 10) {
+      img2.setAttribute("src", "/images/3.png");
+}else if (account.Followers.length >= 10 && account.Followers.length < 12) {
+      img2.setAttribute("src", "/images/2.jpg");
+} else if (account.Followers.length >= 12) {
+    img2.setAttribute("src", "/images/1.jpg");
+}
+
+  h3.appendChild(img2);
+  div3.appendChild(h3);
+  const div4 = document.createElement("div");
+  div4.setAttribute("class", "profile_counts");
+  const div5 = document.createElement("div");
+  div5.setAttribute("class", "align_center");
+  const h31 = document.createElement("h3");
+  h31.setAttribute("class", "count");
+  h31.textContent = `${account.Following.length}`;
+  const h32 = document.createElement("h3");
+  h32.setAttribute("class", "type_count");
+  h32.textContent = "Following";
+  div5.appendChild(h31);
+  div5.appendChild(h32);
+  const div6 = document.createElement("div");
+  div6.setAttribute("class", "align_center");
+  const h33 = document.createElement("h3");
+  h33.setAttribute("class", "count");
+  h33.textContent = `${account.Followers.length}`;
+  
+  const h34 = document.createElement("h3");
+  h34.setAttribute("class", "type_count");
+  h34.textContent = "Followers";
+  
+  div6.appendChild(h33);
+  div6.appendChild(h34);
+  
+  div4.appendChild(div5);
+  div4.appendChild(div6);
+  
+  div2.appendChild(div3);
+  div2.appendChild(div4);
+  
+  div.appendChild(img);
+  div.appendChild(div2);
+  
+  form.appendChild(div);
+  push.appendChild(form)
+   
+  }
+  else{
+    const div = document.createElement("div");
+  div.setAttribute("class", "person_account");
+  const img = document.createElement("img");
+  img.setAttribute("class", "profile_image");
+  img.setAttribute("src", `${account.profile[0].url}`);
+  const div2 = document.createElement("div");
+  div2.setAttribute("class", "profile_details");
+  const div3 = document.createElement("div");
+  div3.setAttribute("class", "align_center1");
+  const h3 = document.createElement("h3");
+  h3.setAttribute("class", "profile_name");
+  h3.textContent = `${account.username}`;
+  const img2 = document.createElement("img");
+  img2.setAttribute("class", "crown");
+ 
+
+if (account.Followers.length <= 3) {
+     img2.setAttribute("src", "/images/6.png");
+} else if (account.Followers.length >=4 && account.Followers.length < 6) {
+      img2.setAttribute("src", "/images/5.jpeg");
+} else if (account.Followers.length >= 6 && account.Followers.length < 8) {
+      img2.setAttribute("src", "/images/4.jpeg");
+}else if (account.Followers.length >= 8 && account.Followers.length < 10) {
+      img2.setAttribute("src", "/images/3.png");
+}else if (account.Followers.length >= 10 && account.Followers.length < 12) {
+      img2.setAttribute("src", "/images/2.jpg");
+} else if (account.Followers.length >= 12) {
+    img2.setAttribute("src", "/images/1.jpg");
+}
+  h3.appendChild(img2);
+  div3.appendChild(h3);
+  const div4 = document.createElement("div");
+  div4.setAttribute("class", "profile_counts");
+  const div5 = document.createElement("div");
+  div5.setAttribute("class", "align_center");
+  const h31 = document.createElement("h3");
+  h31.setAttribute("class", "count");
+  h31.textContent = `${account.Following.length}`;
+  const h32 = document.createElement("h3");
+  h32.setAttribute("class", "type_count");
+  h32.textContent = "Following";
+  div5.appendChild(h31);
+  div5.appendChild(h32);
+  const div6 = document.createElement("div");
+  div6.setAttribute("class", "align_center");
+  const h33 = document.createElement("h3");
+  h33.setAttribute("class", "count");
+  h33.textContent = `${account.Followers.length}`;
+  const h34 = document.createElement("h3");
+  h34.setAttribute("class", "type_count");
+  h34.textContent = "Followers";
+  div6.appendChild(h33);
+  div6.appendChild(h34);
+  div4.appendChild(div5);
+  div4.appendChild(div6);
+  div2.appendChild(div3);
+  div2.appendChild(div4);
+  if (sendRequest.includes(account._id)) {
+    const form = document.createElement("form");
+    form.setAttribute("class", "form1");
+    form.setAttribute(
+      "action",
+      `/profile/${user_id._id}/find_people/${account._id}/cancel`
+    );
+    form.setAttribute("method", "post");
+  
+    const button = document.createElement("button");
+    button.setAttribute("type", "submit");
+    button.setAttribute("id", "remove_button");
+    button.setAttribute("class", "add_button");
+  
+    const img3 = document.createElement("img");
+    img3.setAttribute("class", "add");
+    img3.setAttribute("src", "/images/time-left.png");
+  
+    button.appendChild(img3);
+    form.appendChild(button);
+    div.appendChild(form);
+  
+  
+    
+  } else{
+    const form2 = document.createElement("form");
+    form2.setAttribute("class", "form2");
+    form2.setAttribute(
+      "action",
+      `/profile/${user_id._id}/find_people/${account._id}`
+    );
+    form2.setAttribute("method", "post");
+  
+    const button2 = document.createElement("button");
+    button2.setAttribute("type", "submit");
+    button2.setAttribute("id", "add_button");
+    button2.setAttribute("class", "add_button");
+  
+    const img4 = document.createElement("img");
+    img4.setAttribute("class", "add");
+    img4.setAttribute("src", "/images/add (1).png");
+  
+    button2.appendChild(img4);
+    form2.appendChild(button2);
+  div.appendChild(form2)
+  
+  
+    
+  }
+  
+  div.appendChild(img);
+  div.appendChild(div2);
+  push.appendChild(div)
+  }
+  }
+  const personAccountElements = document.querySelectorAll('#person_account');
+  personAccountElements.forEach((element) => {
+      element.addEventListener('click', () => {
+          element.submit();
+      });
+  });
+  const forms=document.querySelectorAll('form')
+  forms.forEach(form => {
+    form.addEventListener('submit', event => {
+  
+      setTimeout(function(){
+          
+    localStorage.setItem("lastSearchQuery",searchInput );
+  
+      location.reload();
+     }, 50);
+    });
+  });
+  }
+  
+  document.addEventListener('DOMContentLoaded', function() {
+   const input = document.querySelector('.input')
+  
+      function filterObj(data, searchItem) {
+      const temp = data.slice();
+      let regex,
+      filteredData = [];
+      const key = Object.keys(searchItem);
+      const value = Object.values(searchItem);
+      for (let i in key) {
+        const k = key[i],
+          v = value[i];
+        if (typeof v === "number") {
+          filteredData = temp.filter((item) => item[k] === v);
+          return filteredData;
+        }
+        if (typeof v === "object") {
+          let opt = Object.keys(v)[0],
+            val = Object.values(v)[0];
+          const option = ["$gt", "$lt", "$lte", "$gte", "$eq"];
+          if (option.includes(opt)) {
+            switch (opt) {
+              case "$gt":
+                filteredData = filteredData.concat(
+                  temp.filter((item) => item[k] > val)
+                );
+                break;
+              case "$lt":
+                filteredData = filteredData.concat(
+                  temp.filter((item) => item[k] < val)
+                );
+                break;
+              case "$lte":
+                filteredData = filteredData.concat(
+                  temp.filter((item) => item[k] <= val)
+                );
+                break;
+              case "$gte":
+                filteredData = filteredData.concat(
+                  temp.filter((item) => item[k] >= val)
+                );
+                break;
+              case "$eq":
+                filteredData = filteredData.concat(
+                  temp.filter((item) => item[k] === val)
+                );
+                break;
+            }
+          } else {
+            return "Invalid option";
+          }
+          filteredData = [...new Set(filteredData)];
+          return filteredData;
+        }
+        regex = new RegExp(v.trim(), "i");
+        filteredData = temp.filter((item) => regex.test(item[k]));
+        if (filteredData.length === 0) {
+          if (/\s/g.test(v)) {
+            const splittedValue = v.split(" ");
+            for (let i of splittedValue) {
+              regex = new RegExp(i, "i");
+              filteredData.push(...temp.filter((item) => regex.test(item[k])));
+            }
+          }
+        }
+      }
+      filteredData = [...new Set(filteredData)];
+      return filteredData;
+  
+    }
+  
+  
+  
+  
+  const lastSearchQuery = localStorage.getItem("lastSearchQuery");
+  if (lastSearchQuery) {
+   input.value = lastSearchQuery;
+   let searched = filterObj(accounts, { username: input.value });
+  
+   f2(searched,input.value)
+   localStorage.removeItem("lastSearchQuery");
+  
+  
+  }
+  else{
+    f1(accounts,input.value)
+  
+  
+  
+  }
+  
+  
+  input.addEventListener('input', () => {
+      if (input.value.length === 0) {
+          f1(accounts,input.value)
+         
+      } else {
+        let searched = filterObj(accounts, { username: input.value });
+        if(searched.length===0){
+          f1(accounts,input.value)
+        }
+        else{
+         
+          f2(searched,input.value)
+      
+     
+        }
+      
+     
+      }
+    });
+  });
+  </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .error-container {
+            text-align: center;
+            color: rgba(245, 71, 72, 1);
+        }
+        .error-container h1 {
+            font-size: 120px;
+            margin: 0;
+            color: rgba(245, 71, 72, 1);
+        }
+        .error-container p {
+            color: #757575;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+      <h1>500</h1>
+      <p>Something went wrong.</p>
+      <p>Try after sometime</p>
+    </div>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .alert {
+      background-color: red;
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="alert">
+    <h1><%=err.statuscode%></h1>
+    <p><%=err.message%></p>
+  </div>
+</body>
+</html>

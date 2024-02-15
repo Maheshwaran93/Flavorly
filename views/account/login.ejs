@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+    <div class="inputBox">
+      
+        <p><span>"Welcome back!</span> We're thrilled to have you back with us. Please enter your credentials to access your account and enjoy a seamless experience."</p>
+        <h2>Login</h2>
+        <div id="input_alignment">
+            <%if(typeof err !== 'undefined'){%><h4 >Invalid username or password</h4><%}%>
+            <form id="form" action="login" method="post">
+                <div> <img src="/images/user.png" id="person_image"> <input placeholder="Username" <%if(typeof detail !== 'undefined'){%>value="<%=detail.username%>"<%}%> name="username" type="text"> </div>
+            <div><img src="/images/visible.png" id="padlock_image"><input placeholder="Password" <%if(typeof detail !== 'undefined'){%>value="<%=detail.password%>"<%}%> id="password" type="password" name="password"></div>
+              </form>
+        </div>
+        <button id="submitButton" type="button">Login</button>
+        <a href="/register"><button id="signUp">Sign up</button></a>
+       
+    </div>
+    <script>
+         
+        var button = document.getElementById("submitButton");
+        button.addEventListener("click", submitForm);
+        function submitForm() {
+        var form = document.getElementById("form");
+        form.submit();
+      }
+      const password=document.querySelector('#password'); 
+ const padlock_image=document.querySelector('#padlock_image');
+let visible=0;
+
+ padlock_image.addEventListener('click',()=>{
+
+  if(visible==0){
+
+    document.querySelector('#padlock_image').src="/images/visibility.png";
+    document.querySelector('#password').type="text";
+ 
+    visible=1;
+  }
+  else{
+    document.querySelector('#padlock_image').src="/images/visible.png" ;
+    document.querySelector('#password').type="password";
+    visible=0;
+  }
+ })
+
+      </script>
+      
+</body>
+</html>
